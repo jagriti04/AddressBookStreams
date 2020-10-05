@@ -1,6 +1,7 @@
 package com.bl.addressbook;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class AddressBook {
 	
@@ -84,6 +85,12 @@ public class AddressBook {
 			}
 		}
 	}
+	public void viewSortedByNames() {
+		List<ContactDetails> sortedDetails = contactDetailList.stream()
+											.sorted(Comparator.comparing(n->n.toString()))
+											.peek(n -> System.out.println(n))
+											.collect(Collectors.toList());
+	}
 	public void editContact() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter first name of contact to edit it");
@@ -166,7 +173,8 @@ public class AddressBook {
 		boolean runLoop = true;
 		while(runLoop) {
 			System.out.println("Press 1 for adding contact \nPress 2 to view contacts "
-					+ "\nPress 3 to edit a contact \nPress 4 to delete a contact \nPress 5 to exit");
+					+ "\nPress 3 to edit a contact \nPress 4 to delete a contact"
+					+ " \nPress 5 to view sorted address book \nPress 6 to exit");
 			int ch = sc.nextInt();
 			
 			switch(ch) {
@@ -178,6 +186,7 @@ public class AddressBook {
 						
 				case 2: System.out.println("----view contacts --- ");
 						addBook.viewContacts();
+						
 						break;
 						
 				case 3: System.out.println("---- Editing contacts---");
@@ -188,7 +197,11 @@ public class AddressBook {
 						addBook.deleteContact();
 						break;
 						
-				case 5: System.out.println("exit");
+				case 5: System.out.println("------Sorted by name----");
+						addBook.viewSortedByNames();
+						break;
+						
+				case 6: System.out.println("exit");
 						runLoop = false;
 						break;
 						
@@ -199,4 +212,5 @@ public class AddressBook {
 		}
 		return addBook;
 	}
+	 
 }
