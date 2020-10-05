@@ -6,18 +6,23 @@ public class AddressBook {
 	
 	public ArrayList<ContactDetails> contactDetailList;
 	public Map<String, ContactDetails> nameToContactDetailsMap;
-	
+	public Map<String, ArrayList<String> > cityToPersonsMap;
+	private Map<String, ArrayList<String> > stateToPersonsMap;
 	
 	public AddressBook() {
 		contactDetailList = new ArrayList<ContactDetails>();
 		nameToContactDetailsMap = new HashMap<>();
-		
+		cityToPersonsMap = new HashMap<>();
+		stateToPersonsMap = new HashMap<>();
 	}
 	
 	public void addContacts(ContactDetails contactPerson) {
 		System.out.println("-------Adding a Contact---- " + contactPerson.firstName);
 		contactDetailList.add(contactPerson);
 		nameToContactDetailsMap.put(contactPerson.firstName, contactPerson);
+		
+		cityToPersonsMap.computeIfAbsent(contactPerson.city, k -> new ArrayList<>()).add(contactPerson.firstName);
+		stateToPersonsMap.computeIfAbsent(contactPerson.state, k -> new ArrayList<>()).add(contactPerson.firstName);
 	}
 	
 	public ContactDetails getContactInfo() {
@@ -78,7 +83,6 @@ public class AddressBook {
 				System.out.println(contactDetailList.get(i).email);
 			}
 		}
-		
 	}
 	public void editContact() {
 		Scanner sc = new Scanner(System.in);

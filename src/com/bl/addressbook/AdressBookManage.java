@@ -1,5 +1,6 @@
 package com.bl.addressbook;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,10 +11,11 @@ import java.util.stream.Stream;
 public class AdressBookManage {
 	
 	private Map<String, AddressBook> nameToAddressBookMap;
-	List<ContactDetails> valuePrinted = null;
+	public List<String> valuePrinted;
 	
 	public AdressBookManage( ) {
 		nameToAddressBookMap = new HashMap<>();
+		valuePrinted = new ArrayList<>();
 	}
 	
 	public void addAddressBook(String addBookName, AddressBook addBook) {
@@ -36,6 +38,7 @@ public class AdressBookManage {
 		}
 		return true;
 	}
+
 	
 	public void viewAddBooks() {
 		for(int i=0; i< nameToAddressBookMap.size(); i++) {
@@ -44,18 +47,19 @@ public class AdressBookManage {
 	}
 	public void findPersonByCity(String cityName) {
 		nameToAddressBookMap.forEach((key, addresBookValue) -> {
-			valuePrinted = addresBookValue.contactDetailList.stream()
-								   .filter(n -> n.city.equals(cityName))
-								   .peek( n -> System.out.println("Person name---"+ n.firstName + " "+ n.lastName))
-								   .collect(Collectors.toList());;
+			valuePrinted = addresBookValue.cityToPersonsMap.get(cityName).stream()
+							.peek(n -> 
+			   					System.out.println("person names: "+ n))
+							.collect(Collectors.toList());
 		});
 	}
+	
 	public void findPersonByState(String stateName) {
 		nameToAddressBookMap.forEach((key, addresBookValue) -> {
-			valuePrinted = addresBookValue.contactDetailList.stream()
-								   .filter(n -> n.state.equals(stateName))
-								   .peek( n -> System.out.println("Person name---"+ n.firstName + " "+ n.lastName))
-								   .collect(Collectors.toList());;
+			valuePrinted = addresBookValue.cityToPersonsMap.get(stateName).stream()
+					   		.peek(n -> 
+					   				System.out.println("person names: "+ n))
+							.collect(Collectors.toList());
 		});
 	}
 	
