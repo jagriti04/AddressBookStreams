@@ -91,6 +91,19 @@ public class AddressBook {
 											.peek(n -> System.out.println(n))
 											.collect(Collectors.toList());
 	}
+	
+	public void viewSortedByCity() {
+		List<ContactDetails> sortedDetailsByCity = contactDetailList.stream()
+													.sorted((ab1, ab2) -> ab1.getCity().compareTo(ab2.getCity()))
+													.peek(addBook -> System.out.println(addBook))
+													.collect(Collectors.toList());
+	}
+	public void viewSortedByState() {
+		List<ContactDetails> sortedDetailsByCity = contactDetailList.stream()
+													.sorted((ab1, ab2) -> ab1.getState().compareTo(ab2.getState()))
+													.peek(addBook -> System.out.println(addBook))
+													.collect(Collectors.toList());
+	}
 	public void editContact() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter first name of contact to edit it");
@@ -199,6 +212,8 @@ public class AddressBook {
 						
 				case 5: System.out.println("------Sorted by name----");
 						addBook.viewSortedByNames();
+						System.out.println("------Sorted by city----");
+						addBook.viewSortedByCity();
 						break;
 						
 				case 6: System.out.println("exit");
