@@ -4,8 +4,8 @@ import java.util.*;
 
 public class AddressBook {
 	
-	private ArrayList<ContactDetails> contactDetailList;
-	private Map<String, ContactDetails> nameToContactDetailsMap;
+	public ArrayList<ContactDetails> contactDetailList;
+	public Map<String, ContactDetails> nameToContactDetailsMap;
 	
 	
 	public AddressBook() {
