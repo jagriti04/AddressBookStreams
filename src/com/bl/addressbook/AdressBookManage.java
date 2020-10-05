@@ -12,6 +12,7 @@ public class AdressBookManage {
 	
 	private Map<String, AddressBook> nameToAddressBookMap;
 	public List<String> valuePrinted;
+	private int countPerson;
 	
 	public AdressBookManage( ) {
 		nameToAddressBookMap = new HashMap<>();
@@ -46,21 +47,33 @@ public class AdressBookManage {
 		}
 	}
 	public void findPersonByCity(String cityName) {
-		nameToAddressBookMap.forEach((key, addresBookValue) -> {
+		try {
+			nameToAddressBookMap.forEach((key, addresBookValue) -> {
+		
 			valuePrinted = addresBookValue.cityToPersonsMap.get(cityName).stream()
 							.peek(n -> 
 			   					System.out.println("person names: "+ n))
 							.collect(Collectors.toList());
-		});
+			});
+			countPerson = valuePrinted.size();
+		} catch (NullPointerException e) {
+			System.out.println("no person in the city");
+		}
 	}
 	
 	public void findPersonByState(String stateName) {
-		nameToAddressBookMap.forEach((key, addresBookValue) -> {
-			valuePrinted = addresBookValue.cityToPersonsMap.get(stateName).stream()
-					   		.peek(n -> 
-					   				System.out.println("person names: "+ n))
-							.collect(Collectors.toList());
-		});
+		try {
+			nameToAddressBookMap.forEach((key, addresBookValue) -> {
+				valuePrinted = addresBookValue.cityToPersonsMap.get(stateName).stream()
+						   		.peek(n -> 
+						   				System.out.println("person names: "+ n))
+								.collect(Collectors.toList());
+			});
+			countPerson = valuePrinted.size();
+		} catch (NullPointerException e) {
+			System.out.println("no person in the state");
+		}
+
 	}
 	
 	public static void main(String[] args) {
@@ -91,5 +104,6 @@ public class AdressBookManage {
 			}
 			
 		}
+		System.out.println("Number of persons found = " + addBookManage.countPerson);
 	}
 }
