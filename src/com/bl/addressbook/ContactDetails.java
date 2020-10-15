@@ -4,7 +4,7 @@ public class ContactDetails {
 	public String firstName, lastName, address, city, state, email;
 	public long zip;
 	public long phoneNo;
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -69,8 +69,8 @@ public class ContactDetails {
 		this.phoneNo = phoneNo;
 	}
 
-	public ContactDetails(String fName, String lName, String address, String city,
-						String state, long zip, long phoneNo, String email){
+	public ContactDetails(String fName, String lName, String address, String city, String state, long zip, long phoneNo,
+			String email) {
 		this.firstName = fName;
 		this.lastName = lName;
 		this.address = address;
@@ -80,10 +80,10 @@ public class ContactDetails {
 		this.phoneNo = phoneNo;
 		this.email = email;
 	}
+
 	@Override
-    public String toString() { 
-        return String.format("Name: " + firstName +" "+ lastName 
-        						+ " Address: "+ address + " City: "+ city + " State: "+ state
-        						+ "zip " + zip + " phone no. "+ phoneNo); 
-    }
+	public String toString() {
+		return String.format("Name: " + firstName + " " + lastName + ", Address: " + address + ", City: " + city
+				+ ", State: " + state + ", zip " + zip + ", phone no. " + phoneNo + ", EmailId: " + email);
+	}
 }
